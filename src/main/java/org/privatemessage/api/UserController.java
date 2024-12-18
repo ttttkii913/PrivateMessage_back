@@ -21,4 +21,11 @@ public class UserController {
         UserResDto userResDto = userService.saveNickname(userReqDto);
         return ResponseEntity.ok(userResDto);
     }
+
+    @GetMapping("/nickname/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<UserResDto> findOne(@PathVariable Long id) {
+        UserResDto userResDto = userService.findById(id);
+        return ResponseEntity.ok(userResDto);
+    }
 }

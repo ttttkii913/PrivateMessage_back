@@ -7,7 +7,6 @@ import org.privatemessage.api.dto.response.UserResDto;
 import org.privatemessage.domain.Repository.UserRepository;
 import org.privatemessage.domain.User;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -22,7 +21,11 @@ public class UserService {
                 .build();
         user = userRepository.save(user);
 
-
         return UserResDto.from(user);
+    }
+
+    public UserResDto findById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return  UserResDto.from(user);
     }
 }
